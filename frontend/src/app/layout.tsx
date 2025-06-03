@@ -1,13 +1,16 @@
 import {
   QueryProvider,
 } from '@/app/_providers';
-import { ClerkProvider } from '@clerk/nextjs';
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 import { dark } from '@clerk/themes';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
 import clsx from 'clsx';
+import Header from "../widgets/header"
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -36,7 +39,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       }}>
       <html lang="en" suppressHydrationWarning>
         <body className={clsx(inter.className, 'bg-white dark:bg-[#151315]')}>
-          <QueryProvider>{children}</QueryProvider>
+        <Header />
+        <QueryProvider>{children}</QueryProvider>
         </body>
       </html>
     </ClerkProvider>
