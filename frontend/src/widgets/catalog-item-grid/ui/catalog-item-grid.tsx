@@ -1,7 +1,8 @@
 import React from 'react';
 import ItemGrid from "@/features/item-grid";
+import {SidebarInset} from "@/features/sidebar";
 
-const items = [
+const itemMocks = [
   {
     imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
     tagText: "Top Seller",
@@ -40,10 +41,19 @@ const items = [
   }
 ]
 
+const items = Array.from({length: 20}, (_, index) => {
+  const item = itemMocks[index % itemMocks.length];
+  return {
+    ...item,
+    id: index + 1,
+  };
+});
 
 const CatalogItemGrid = () => {
   return (
-    <ItemGrid items={items} />
+    <SidebarInset className="lg:ml-0">
+      <ItemGrid items={items}/>
+    </SidebarInset>
   );
 };
 

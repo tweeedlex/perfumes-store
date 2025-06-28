@@ -4,6 +4,7 @@ import ImageViewer from "@/shared/ui/image-viewer-basic";
 import PriceFormatSale from "@/shared/ui/price-format-sale";
 import StarRating_Fractions from "@/shared/ui/rating-star-fractions";
 import { Button } from "@/shared/ui/button";
+import {cn} from "@/shared/lib";
 
 const DEFAULT_IMAGE_URL =
   "https://raw.githubusercontent.com/stackzero-labs/ui/refs/heads/main/public/placeholders/headphone-1.jpg";
@@ -21,6 +22,7 @@ interface ProductCardProps {
   onAddToCart?: () => void;
   onBuyNow?: () => void;
   currencyPrefix?: string;
+  className?: string;
 }
 
 function ProductCard({
@@ -36,9 +38,10 @@ function ProductCard({
                           reviewCount = 87,
                           salePrice = 179,
                           tagText = "NEW COLLECTION",
+                          className = "",
                         }: ProductCardProps = {}) {
   return (
-    <div className="group relative flex w-[250px] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900">
+    <div className={cn("group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900", className)}>
       {/* Badge */}
       {tagText && (
         <div className="absolute top-3 left-3 z-10">
@@ -64,7 +67,7 @@ function ProductCard({
       </div>
 
       {/* Product details */}
-      <div className="flex flex-1 flex-col gap-3 p-4">
+      <div className="flex flex-1 flex-col gap-3 p-4 justify-between">
         <div>
           <h3 className="mb-1 text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100">
             {productName}
@@ -82,36 +85,36 @@ function ProductCard({
               {rating} ({reviewCount} reviews)
             </span>
           </div>
+          <div className="mt-1">
+            <PriceFormatSale
+              prefix={currencyPrefix}
+              originalPrice={originalPrice}
+              salePrice={salePrice}
+              showSavePercentage
+              className="text-xl font-semibold text-gray-600 dark:text-gray-300"
+              classNameSalePrice="text-3xl font-bold text-rose-600 dark:text-rose-400"
+              classNameSalePercentage="rounded-sm bg-green-500/50 p-1 text-xs font-medium text-white"
+            />
+            {freeShipping && (
+              <p className="mt-1 inline-flex items-center text-sm text-green-600 dark:text-green-400">
+                <svg
+                  className="mr-1 h-4 w-4"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Free Shipping
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Price */}
-        <div className="mt-1">
-          <PriceFormatSale
-            prefix={currencyPrefix}
-            originalPrice={originalPrice}
-            salePrice={salePrice}
-            showSavePercentage
-            className="text-xl font-semibold text-gray-600 dark:text-gray-300"
-            classNameSalePrice="text-3xl font-bold text-rose-600 dark:text-rose-400"
-            classNameSalePercentage="rounded-sm bg-green-500/50 p-1 text-xs font-medium text-white"
-          />
-          {freeShipping && (
-            <p className="mt-1 inline-flex items-center text-sm text-green-600 dark:text-green-400">
-              <svg
-                className="mr-1 h-4 w-4"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Free Shipping
-            </p>
-          )}
-        </div>
 
         <div className="mt-2 flex flex-col gap-2">
           <Button
