@@ -1,7 +1,7 @@
 "use client"
-import React, {useEffect} from 'react';
+import React from 'react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import Cart, {CartProvider, CartTrigger} from "@/widgets/cart";
+import CartModal, {CartProvider, CartTrigger} from "@/widgets/cart-sidebar";
 
 const Header: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         </SignedIn>
         <CartProvider>
           <CartTrigger />
-          <Cart />
+          <CartModal />
         </CartProvider>
       </header>
     </>
