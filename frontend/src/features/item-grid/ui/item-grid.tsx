@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard, {ProductCardProps} from "@/features/product-card"
+import ProductCard, {ProductCardProps} from "@/entities/product-card"
 
 interface IProps {
   items: ProductCardProps[];

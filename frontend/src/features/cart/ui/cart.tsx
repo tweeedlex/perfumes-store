@@ -1,7 +1,7 @@
 "use client";
 
-import PriceFormat from "@/shared/ui/price-format-basic";
-import QuantityInputBasic from "@/shared/ui/quantity-input-basic";
+import PriceFormat from "@/entities/commerce-ui/price-format-basic";
+import QuantityInputBasic from "@/entities/commerce-ui/quantity-input-basic";
 import { Button } from "@/shared/ui/button";
 import { Loader2, ShoppingCart } from "lucide-react";
 

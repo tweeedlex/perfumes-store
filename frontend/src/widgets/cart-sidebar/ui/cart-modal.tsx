@@ -9,18 +9,6 @@ const CartModal: FC = () => {
   const open = useSelector((state: RootState) => state.open);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [open]);
-
   return (
     <Dialog open={open} onOpenChange={() => dispatch(toggleOpen())} defaultOpen={false}>
       <DialogContent className="p-0 min-w-full md:min-w-[700px]">

@@ -17,15 +17,18 @@ const config: Config = {
   		center: true,
   		padding: '2rem',
   		screens: {
-				'xs': '400px',
-				'sm': '480px',
-				'md': '768px',
-				'lg': '1024px',
-				'xl': '1280px',
+  			xs: '400px',
+  			sm: '480px',
+  			md: '768px',
+  			lg: '1024px',
+  			xl: '1280px',
   			'2xl': '1400px'
   		}
   	},
   	extend: {
+			width: {
+				'container': '1440px',
+			},
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
   			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
@@ -86,7 +89,7 @@ const config: Config = {
   		keyframes: {
   			'accordion-down': {
   				from: {
-  					height: '0px'
+  					height: '0'
   				},
   				to: {
   					height: 'var(--radix-accordion-content-height)'
@@ -97,7 +100,7 @@ const config: Config = {
   					height: 'var(--radix-accordion-content-height)'
   				},
   				to: {
-  					height: '0px'
+  					height: '0'
   				}
   			}
   		},
