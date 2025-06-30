@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import CartModal, {CartProvider, CartTrigger} from "@/widgets/cart-sidebar";
+import CartModal, {CartProvider, CartTrigger} from "@/widgets/cart-modal";
 import Link from "next/link";
 
 const Header: React.FC = () => {

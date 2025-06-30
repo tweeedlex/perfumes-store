@@ -1,6 +1,7 @@
 "use client";
 
 import ImageViewer from "@/shared/ui/image-viewer-basic";
+import Image from "next/image";
 import PriceFormatSale from "@/shared/ui/price-format-sale";
 import StarRating_Fractions from "@/shared/ui/rating-star-fractions";
 import {Button} from "@/shared/ui/button";
@@ -62,17 +63,22 @@ function ProductCard({
       )}
 
       {/* Image container with background glow effect */}
-      <div
-        className="relative overflow-hidden bg-gradient-to-br from-rose-50 to-orange-50 p-6 dark:from-rose-950/30 dark:to-orange-950/30">
+      <Link href={"/product/1"}>
         <div
-          className="absolute -bottom-10 left-1/2 h-40 w-40 -translate-x-1/2 transform rounded-full bg-rose-500/20 blur-3xl"></div>
-        <div className="transition-transform duration-500 group-hover:scale-105">
-          <ImageViewer
-            imageUrl={imageUrl}
-            classNameThumbnailViewer="rounded-lg object-contain h-[160px] mx-auto"
-          />
+          className="relative overflow-hidden bg-gradient-to-br from-rose-50 to-orange-50 p-6 dark:from-rose-950/30 dark:to-orange-950/30">
+          <div
+            className="absolute -bottom-10 left-1/2 h-40 w-40 -translate-x-1/2 transform rounded-full bg-rose-500/20 blur-3xl"></div>
+          <div className="transition-transform duration-500 group-hover:scale-105">
+            <Image
+              src={imageUrl}
+              className="rounded-lg object-contain h-[160px] mx-auto"
+              alt={productName}
+              width={200}
+              height={200}
+            />
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* Product details */}
       <div className="flex flex-1 flex-col gap-3 p-4 justify-between">

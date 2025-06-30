@@ -14,20 +14,20 @@ const ItemGrid: React.FC<IProps> = ({items}) => {
                 lg:grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))]">
       {
         items.map(item => (
-            <ProductCard
-              key={item.productName}
-              imageUrl={item.imageUrl}
-              tagText={item.tagText}
-              productName={item.productName}
-              originalPrice={item.originalPrice}
-              salePrice={item.salePrice}
-              freeShipping={item.freeShipping}
-              reviewCount={item.reviewCount}
-              rating={item.rating}
-              maxRating={item.maxRating}
-              currencyPrefix={item.currencyPrefix}
-              className={"h-full w-full"}
-            />
+          <ProductCard
+            key={item.productName}
+            imageUrl={item.imageUrl}
+            tagText={item.tagText}
+            productName={item.productName}
+            originalPrice={item.originalPrice}
+            salePrice={item.salePrice}
+            freeShipping={item.freeShipping}
+            reviewCount={item.reviewCount}
+            rating={item.rating}
+            maxRating={item.maxRating}
+            currencyPrefix={item.currencyPrefix}
+            className={"h-full w-full"}
+          />
         ))
       }
     </div>

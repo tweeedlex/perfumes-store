@@ -1,13 +1,20 @@
 import React, {FC} from 'react';
 import {Provider, useDispatch, useSelector} from "react-redux";
-import cartStore, {RootState, toggleOpen} from "@/widgets/cart-sidebar/model/cart-store";
+import cartStore, {RootState, toggleOpen} from "@/widgets/cart-modal/model/cart-store";
 import {ShoppingBasket} from "lucide-react";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/shared/ui/dialog";
 import Cart from "@/features/cart";
+import { useRouter } from 'next/navigation'
 
 const CartModal: FC = () => {
   const open = useSelector((state: RootState) => state.open);
   const dispatch = useDispatch();
+  const router = useRouter()
+
+  const onCheckout = () => {
+    router.push('/checkout');
+    dispatch(toggleOpen());
+  }
 
   return (
     <Dialog open={open} onOpenChange={() => dispatch(toggleOpen())} defaultOpen={false}>
@@ -18,7 +25,7 @@ const CartModal: FC = () => {
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto p-4">
-          <Cart currencyPrefix={"₴"} storeName={"Perfumes"} />
+          <Cart onCheckout={onCheckout} onContinueShopping={() => dispatch(toggleOpen())} currencyPrefix={"₴"} storeName={"Perfumes"} />
         </div>
       </DialogContent>
     </Dialog>
