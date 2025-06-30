@@ -12,13 +12,13 @@ const Header: React.FC = () => {
           Perfumes
         </Link>
         <div className={"flex justify-end items-center gap-4"}>
-          <SignedOut>
-            <SignInButton/>
-            <SignUpButton/>
-          </SignedOut>
-          <SignedIn>
-            <UserButton/>
-          </SignedIn>
+          {/*<SignedOut>*/}
+          {/*  <SignInButton/>*/}
+          {/*  <SignUpButton/>*/}
+          {/*</SignedOut>*/}
+          {/*<SignedIn>*/}
+          {/*  <UserButton/>*/}
+          {/*</SignedIn>*/}
           <CartProvider>
             <CartTrigger/>
             <CartModal/>
