@@ -6,7 +6,7 @@ module.exports = Router({ mergeParams: true }).put("/admin/product/:id", async (
     const { db, ApiError } = req;
     const { name, price, discountPrice, description, label, stock } = req.body;
     const { id } = req.params;
-    requiredCheck(req.body, { name, price });
+    requiredCheck({ name, price });
 
     const existingProduct = await db.Product.findOne({
       name: name.trim(),

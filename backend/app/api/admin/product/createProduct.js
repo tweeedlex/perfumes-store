@@ -5,7 +5,7 @@ module.exports = Router({ mergeParams: true }).post("/admin/product", async (req
   try {
     const { db, ApiError } = req
     const { name, price, discountPrice, description, label, stock } = req.body;
-    requiredCheck(req.body, { name, price });
+    requiredCheck({ name, price });
 
     const existingProduct = await db.Product.findOne({
       name: name.trim(),
