@@ -13,7 +13,6 @@ module.exports = Router({ mergeParams: true }).put("/admin/product/:id", async (
       name: name.trim(),
       _id: { $ne: id }
     });
-
     if (existingProduct) {
       return next(ApiError.BadRequest("Product with this name already exists"));
     }
@@ -21,22 +20,22 @@ module.exports = Router({ mergeParams: true }).put("/admin/product/:id", async (
     let filterValueIds = [];
 
     if (filters?.length) {
-      const filterIds = filters.map((filter) => filter._id);
+      const filterIds = filters.map(f => f._id);
       const filterObjects = await db.Filter.find({ _id: { $in: filterIds } });
 
       if (filterObjects.length !== filterIds.length) {
         return next(ApiError.BadRequest("One or more filters do not exist"));
       }
 
-      const filterValues = filters.map((filter) => ({
-        filterId: filter._id,
-        value: filter.value,
+      const filterValues = filters.map(f => ({
+        filter: f._id,
+        value: f.value,
       }));
 
       await db.FilterValue.bulkWrite(
         filterValues.map(fv => ({
           updateOne: {
-            filter: { filterId: fv.filterId, value: fv.value },
+            filter: { filter: fv.filter, value: fv.value },
             update: { $setOnInsert: fv },
             upsert: true,
           }
@@ -44,7 +43,7 @@ module.exports = Router({ mergeParams: true }).put("/admin/product/:id", async (
       );
 
       const filterValueDocs = await db.FilterValue.find({
-        $or: filterValues.map(fv => ({ filterId: fv.filterId, value: fv.value }))
+        $or: filterValues.map(fv => ({ filter: fv.filter, value: fv.value }))
       }).select('_id');
 
       filterValueIds = filterValueDocs.map(doc => doc._id);

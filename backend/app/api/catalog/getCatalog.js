@@ -31,7 +31,7 @@ module.exports = Router().get("/catalog", async (req, res, next) => {
       const values = Array.isArray(value) ? value : [value];
 
       const matchingValues = await db.FilterValue.find({
-        filterId,
+        filter: filterId,
         value: { $in: values }
       }).select('_id').lean();
 
@@ -61,7 +61,7 @@ module.exports = Router().get("/catalog", async (req, res, next) => {
       ...productQuery,
       price: { ...productQuery.price, $lte: +maxPrice }
     })
-    .populate({ path: "filters", populate: { path: "filterId" } })
+    .populate({ path: "filters", populate: { path: "filter" } })
     .skip((numericPage - 1) * numericLimit)
     .limit(numericLimit)
     .lean();
@@ -75,13 +75,13 @@ module.exports = Router().get("/catalog", async (req, res, next) => {
 
     const usedFilterValues = await db.FilterValue.find({
       _id: { $in: Array.from(usedFilterValueIds) }
-    }).populate("filterId").lean();
+    }).populate("filter").lean();
 
     const filtersResponse = [];
 
     for (const filter of allFilters) {
       const values = usedFilterValues.filter(fv =>
-        fv.filterId._id.toString() === filter._id.toString()
+        fv.filter._id.toString() === filter._id.toString()
       );
 
       const uniqueValues = [...new Map(
