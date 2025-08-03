@@ -6,5 +6,6 @@ module.exports = mongoose.Schema({
 	discountPrice: { type: Number },
 	label: { type: String },
 	stock: { type: Number, default: 1 },
-	description: { type: String }
+	description: { type: String },
+	filters: [{ type: mongoose.Schema.Types.ObjectId, ref: "FilterValue" }],
 });
