@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 const expressWinston = require("express-winston");
 const apiRouter = require("./api/createApiRouter.js")();
 const cors = require("cors");
 const ApiError = require("./exceptions/api-error.js");
 const fileUpload = require("express-fileupload");
+const adminMiddleware = require("./middlewares/adminMiddleware.js");
 
 module.exports = ({ database, logger, isTest }) =>
   express()
@@ -21,6 +23,7 @@ module.exports = ({ database, logger, isTest }) =>
   )
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
+  .use(cookieParser())
   .use((req, res, next) => {
     req.base = `${req.protocol}://${req.get("host")}`;
     req.logger = logger;
@@ -36,6 +39,7 @@ module.exports = ({ database, logger, isTest }) =>
   )
   .use(fileUpload())
   .use("/", express.static("static"))
+  .use("/api/admin", adminMiddleware)
   .use("/api", apiRouter)
   .use((req, res) => res.sendStatus(404))
   .use((error, req, res, next) => {
