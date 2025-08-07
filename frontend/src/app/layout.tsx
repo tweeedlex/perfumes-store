@@ -4,10 +4,10 @@ import {
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
-import {dark} from '@clerk/themes';
-import type {Metadata, Viewport} from 'next';
-import {Inter} from 'next/font/google';
-import {ReactNode} from 'react';
+import { dark } from '@clerk/themes';
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
+import { ReactNode } from 'react';
 import './globals.css';
 import clsx from 'clsx';
 import Header from "../widgets/header"
@@ -27,12 +27,12 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   width: 'device-width',
-  initialScale: 0,
+  initialScale: 1,
   maximumScale: 1,
   userScalable: false,
 };
 
-export default function RootLayout({children}: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider
       appearance={{

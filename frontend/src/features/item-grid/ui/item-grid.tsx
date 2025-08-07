@@ -1,9 +1,24 @@
 import React from 'react';
-import ProductCard, {ProductCardProps} from "@/entities/product-card"
+import ProductCard from "@/entities/product-card"
+import { IProduct } from "@/shared/model/api/product/types";
 
 interface IProps {
-  items: ProductCardProps[];
+  items: IProduct[];
 }
+
+
+// {
+//     imageUrl: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+//     tagText: "Limited",
+//     productName: "Converse Chuck Taylor",
+//     originalPrice: 89.99,
+//     salePrice: 79.99,
+//     freeShipping: true,
+//     reviewCount: 231,
+//     rating: 4.9,
+//     maxRating: 5,
+//     currencyPrefix: "$"
+//   }
 
 const ItemGrid: React.FC<IProps> = ({items}) => {
   return (
@@ -13,19 +28,15 @@ const ItemGrid: React.FC<IProps> = ({items}) => {
                 md:grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))]
                 lg:grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))]">
       {
-        items.map(item => (
+        items.map((item: IProduct)  => (
           <ProductCard
-            key={item.productName}
-            imageUrl={item.imageUrl}
-            tagText={item.tagText}
-            productName={item.productName}
-            originalPrice={item.originalPrice}
-            salePrice={item.salePrice}
-            freeShipping={item.freeShipping}
-            reviewCount={item.reviewCount}
-            rating={item.rating}
-            maxRating={item.maxRating}
-            currencyPrefix={item.currencyPrefix}
+            key={item._id}
+            imageUrl={"https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80"}
+            tagText={item.label}
+            productName={item.name}
+            originalPrice={item.price}
+            salePrice={item.discountPrice}
+            currencyPrefix={"₴"}
             className={"h-full w-full"}
           />
         ))

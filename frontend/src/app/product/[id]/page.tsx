@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import ProductPage from "@/_pages/product/ui/product";
+import ProductPage from "@/_pages/product";
 
 const Product: FC = () => {
  return (
